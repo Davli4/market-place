@@ -17,7 +17,7 @@ public class BaseRepository<T>{
     protected final JdbcTemplate jdbcTemplate;
     protected final RowMapper<T> rowMapper;
 
-    public Optional<T> findById(String query, Object... args) {
+    public Optional<T> findOne(String query, Object... args) {
         try {
             T res = jdbcTemplate.queryForObject(query, rowMapper, args);
             return Optional.ofNullable(res);
@@ -35,7 +35,7 @@ public class BaseRepository<T>{
         }
     }
 
-    protected Integer insert (String query, Object... args) {
+    protected Integer insert(String query, Object... args) {
         GeneratedKeyHolder keyHolder = new GeneratedKeyHolder();
         jdbcTemplate.update(con ->  {
             PreparedStatement ps = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);

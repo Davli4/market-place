@@ -14,5 +14,4 @@ public class Order {
     private OrderStatus orderStatus;
     private String shippingAddress;
     private String paymentMethod;
-
 }
