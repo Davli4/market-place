@@ -10,12 +10,12 @@ public class User {
     private Integer id;
     private String email;
     private String password;
-    private String first_name;
-    private String last_name;
+    private String firstName;
+    private String lastName;
     private String phone;
     private Role role;
-    private LocalDateTime created_at;
-    private LocalDateTime updated_at;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 
     private List<Order> orders;
     private List<Product> products;
