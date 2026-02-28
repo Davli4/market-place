@@ -2,6 +2,7 @@ package davl.marketplace.service;
 
 import davl.marketplace.dal.UserRepository;
 import davl.marketplace.dto.NewUserRequest;
+import davl.marketplace.dto.UpdateUserRequest;
 import davl.marketplace.dto.UserDto;
 import davl.marketplace.exception.NotFoundException;
 import davl.marketplace.mapper.UserMapper;
@@ -38,5 +39,13 @@ public class UserService {
 
     public void deleteById(Integer id) {
         userRepository.deleteById(id);
+    }
+
+    public UserDto updateUser(int userId, UpdateUserRequest updateUserRequest) {
+            User updateUser = userRepository.findById(userId)
+                    .map(user -> UserMapper.updateUser(user,updateUserRequest))
+                    .orElseThrow(() -> new NotFoundException("Пользователь не найден"));
+            userRepository.updateUserFirstName(updateUser);
+            return UserMapper.mapToUserDto(updateUser);
     }
 }

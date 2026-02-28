@@ -2,6 +2,7 @@ package davl.marketplace.mapper;
 
 import davl.marketplace.dto.NewUserRequest;
 import davl.marketplace.dto.ProductSummaryDto;
+import davl.marketplace.dto.UpdateUserRequest;
 import davl.marketplace.dto.UserDto;
 import davl.marketplace.model.Product;
 import davl.marketplace.model.Role;
@@ -56,7 +57,7 @@ public class UserMapper {
         return userDto;
     }
 
-    private static ProductSummaryDto  mapToProductSummaryDto(Product product) {
+    private static ProductSummaryDto mapToProductSummaryDto(Product product) {
         ProductSummaryDto productSummaryDto = new ProductSummaryDto();
         productSummaryDto.setId(product.getId());
         productSummaryDto.setName(product.getName());
@@ -64,5 +65,27 @@ public class UserMapper {
         productSummaryDto.setQuantity(product.getQuantity());
 
         return  productSummaryDto;
+    }
+
+    public static User updateUser(User user, UpdateUserRequest updateUserRequest) {
+        if (updateUserRequest.hasFirstName()) {
+            user.setFirstName(updateUserRequest.getFirstName());
+        }
+        if (updateUserRequest.hasLastName()) {
+            user.setLastName(updateUserRequest.getLastName());
+        }
+        if (updateUserRequest.hasPassword()) {
+            user.setPassword(updateUserRequest.getPassword());
+        }
+        if (updateUserRequest.hasEmail()) {
+            user.setEmail(updateUserRequest.getEmail());
+        }
+        if (updateUserRequest.hasPhone()) {
+            user.setPhone(updateUserRequest.getPhone());
+        }
+        if (updateUserRequest.hasProducts()) {
+            user.setProducts(new ArrayList<>());
+        }
+        return  user;
     }
  }

@@ -1,6 +1,7 @@
 package davl.marketplace.controller;
 
 import davl.marketplace.dto.NewUserRequest;
+import davl.marketplace.dto.UpdateUserRequest;
 import davl.marketplace.dto.UserDto;
 import davl.marketplace.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,5 +29,10 @@ public class UserController {
     @DeleteMapping("/{id}")
     public void deleteUserById(@PathVariable Integer id) {
         userService.deleteById(id);
+    }
+
+    @PutMapping("/{id}")
+    public UserDto updateUserFirstName(@PathVariable int id, @RequestBody UpdateUserRequest updateUserRequest) {
+        return userService.updateUser(id,updateUserRequest);
     }
 }
