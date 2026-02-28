@@ -46,4 +46,9 @@ public class BaseRepository<T>{
 
         return keyHolder.getKey().intValue();
     }
+
+    protected boolean delete(String query, Object... args) {
+        int  deleteCount = jdbcTemplate.update(query, args);
+        return deleteCount > 0;
+    }
 }

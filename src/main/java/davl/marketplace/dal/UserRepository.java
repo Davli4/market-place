@@ -13,6 +13,7 @@ public class UserRepository extends BaseRepository<User>{
     private static final String SELECT_ALL_USERS = "SELECT * FROM USERS";
     private static final String SELECT_USER_BY_ID = "SELECT * FROM USERS WHERE ID = ?";
     private static final String INSERT_USER_QUERY = "INSERT INTO users (email, password, first_name, last_name, phone, role, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    private static final String DELETE_USER_QUERY = "DELETE FROM users WHERE ID = ?";
     public UserRepository(JdbcTemplate jdbcTemplate, RowMapper<User> rowMapper) {
         super(jdbcTemplate, rowMapper);
     }
@@ -36,5 +37,9 @@ public class UserRepository extends BaseRepository<User>{
         );
         user.setId(id);
         return user;
+    }
+
+    public void deleteById(int id) {
+        delete(DELETE_USER_QUERY, id);
     }
 }

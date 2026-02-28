@@ -2,10 +2,8 @@ package davl.marketplace.controller;
 
 import davl.marketplace.dto.NewUserRequest;
 import davl.marketplace.dto.UserDto;
-import davl.marketplace.model.User;
 import davl.marketplace.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,5 +23,10 @@ public class UserController {
     @PostMapping
     public UserDto createUser(@RequestBody NewUserRequest newUserRequest) {
         return userService.save(newUserRequest);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteUserById(@PathVariable Integer id) {
+        userService.deleteById(id);
     }
 }

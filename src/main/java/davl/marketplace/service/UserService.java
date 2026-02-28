@@ -35,4 +35,8 @@ public class UserService {
         user = userRepository.saveUser(user);
         return  UserMapper.mapToUserDto(user);
     }
+
+    public void deleteById(Integer id) {
+        userRepository.deleteById(id);
+    }
 }
