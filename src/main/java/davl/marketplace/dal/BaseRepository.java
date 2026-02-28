@@ -44,12 +44,6 @@ public class BaseRepository<T>{
             }
         return ps;}, keyHolder);
 
-        Integer id =  keyHolder.getKeyAs(Integer.class);
-
-        if (id != null) {
-            return id;
-        } else {
-            throw new EmptyResultDataAccessException(0);
-        }
+        return keyHolder.getKey().intValue();
     }
 }

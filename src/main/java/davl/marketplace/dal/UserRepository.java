@@ -12,6 +12,7 @@ import java.util.Optional;
 public class UserRepository extends BaseRepository<User>{
     private static final String SELECT_ALL_USERS = "SELECT * FROM USERS";
     private static final String SELECT_USER_BY_ID = "SELECT * FROM USERS WHERE ID = ?";
+    private static final String INSERT_USER_QUERY = "INSERT INTO users (email, password, first_name, last_name, phone, role, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
     public UserRepository(JdbcTemplate jdbcTemplate, RowMapper<User> rowMapper) {
         super(jdbcTemplate, rowMapper);
     }
@@ -20,5 +21,20 @@ public class UserRepository extends BaseRepository<User>{
 
     public Optional<User> findById (int id) {
         return findOne(SELECT_USER_BY_ID, id);
+    }
+
+    public User saveUser(User user) {
+        int id = insert(INSERT_USER_QUERY,
+                user.getEmail(),
+                user.getPassword(),
+                user.getFirstName(),
+                user.getLastName(),
+                user.getPhone(),
+                user.getRole() != null ? user.getRole().name() : "CUSTOMER",
+                user.getCreatedAt(),
+                user.getUpdatedAt()
+        );
+        user.setId(id);
+        return user;
     }
 }
